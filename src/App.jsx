@@ -12,10 +12,13 @@ import Reminders from './pages/Reminders';
 import Reports from './pages/Reports';
 import Settings from './pages/Settings';
 
-function App() {
+import { LanguageProvider } from './context/LanguageContext';
+
+export default function App() {
   return (
-    <Router>
-      <MainLayout>
+    <LanguageProvider>
+      <Router>
+        <MainLayout>
         <Routes>
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<Dashboard />} />
@@ -29,7 +32,8 @@ function App() {
         </Routes>
       </MainLayout>
     </Router>
+   </LanguageProvider>
   );
 }
 
-export default App;
+

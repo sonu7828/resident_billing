@@ -1,4 +1,3 @@
-import React from 'react';
 import { 
   Users, 
   TrendingUp, 
@@ -11,11 +10,14 @@ import {
   ChevronRight,
   LayoutDashboard
 } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Dashboard() {
+  const { t } = useLanguage();
+
   const summaryCards = [
     { 
-      title: 'Total Outstanding', 
+      title: 'outstandingBalance', 
       value: '€12,450', 
       trend: '+12.5%', 
       icon: AlertCircle, 
@@ -25,7 +27,7 @@ export default function Dashboard() {
       border: 'border-rose-100'
     },
     { 
-      title: 'Received (Monthly)', 
+      title: 'totalReceived', 
       value: '€8,200', 
       trend: '+8.2%', 
       icon: TrendingUp, 
@@ -35,7 +37,7 @@ export default function Dashboard() {
       border: 'border-emerald-100'
     },
     { 
-      title: 'Overdue Residents', 
+      title: 'overdueResidents', 
       value: '14', 
       trend: '-2 residents', 
       icon: Users, 
@@ -59,17 +61,17 @@ export default function Dashboard() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
         <div>
-          <h2 className="text-4xl font-extrabold text-slate-800 tracking-tight">Dashboard</h2>
+          <h2 className="text-4xl font-extrabold text-slate-800 tracking-tight">{t('dashboard')}</h2>
           <p className="text-slate-500 text-lg mt-1.5 font-medium">Welcome back! Here's what's happening today.</p>
         </div>
         <div className="flex items-center gap-4">
           <button className="inline-flex items-center px-6 py-3.5 bg-white border border-slate-200 rounded-[1.25rem] text-[15px] font-bold text-slate-700 hover:bg-slate-50 hover:shadow-md transition-all active:scale-95 group focus:ring-4 focus:ring-slate-100">
             <Plus className="w-5 h-5 mr-2.5 text-slate-400 group-hover:text-slate-800 transition-colors" />
-            Add Resident
+            {t('addResident')}
           </button>
           <button className="inline-flex items-center px-6 py-3.5 bg-gradient-to-r from-indigo-600 to-violet-600 rounded-[1.25rem] text-[15px] font-bold text-white hover:from-indigo-700 hover:to-violet-700 shadow-lg shadow-indigo-100 hover:-translate-y-0.5 transition-all active:scale-95 group focus:ring-4 focus:ring-indigo-100">
             <PlusCircle className="w-5 h-5 mr-2.5 group-hover:rotate-90 transition-transform duration-300" strokeWidth={3} />
-            Add Payment
+            {t('addPayment')}
           </button>
         </div>
       </div>
@@ -91,7 +93,7 @@ export default function Dashboard() {
               </div>
             </div>
             <div className="mt-8 relative z-10">
-              <h3 className="text-[13px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2">{card.title}</h3>
+              <h3 className="text-[13px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2">{t(card.title)}</h3>
               <p className="text-4xl font-black text-slate-800 tracking-tighter">{card.value}</p>
             </div>
             {/* Background Accent */}
@@ -105,7 +107,7 @@ export default function Dashboard() {
         <div className="lg:col-span-2 bg-white rounded-[2.5rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-slate-100 flex flex-col min-h-[450px]">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h3 className="text-2xl font-black text-slate-800 tracking-tight">Revenue Overview</h3>
+              <h3 className="text-2xl font-black text-slate-800 tracking-tight">{t('revenueOverview')}</h3>
               <p className="text-[15px] font-medium text-slate-500 mt-1">Monthly collection vs outstanding.</p>
             </div>
             <select className="px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-[13px] font-bold text-slate-600 outline-none focus:ring-4 focus:ring-slate-100 transition-all cursor-pointer">
@@ -125,8 +127,8 @@ export default function Dashboard() {
         {/* Recent Activity */}
         <div className="bg-white rounded-[2.5rem] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.02)] border border-slate-100 flex flex-col">
           <div className="flex items-center justify-between mb-8">
-            <h3 className="text-2xl font-black text-slate-800 tracking-tight">Activity</h3>
-            <button className="text-[13px] font-black text-indigo-600 hover:text-indigo-800 uppercase tracking-widest hover:underline transition-all">View All</button>
+            <h3 className="text-2xl font-black text-slate-800 tracking-tight">{t('activity')}</h3>
+            <button className="text-[13px] font-black text-indigo-600 hover:text-indigo-800 uppercase tracking-widest hover:underline transition-all">{t('viewAll')}</button>
           </div>
           <div className="space-y-4 flex-1">
             {recentActivity.map((activity) => (

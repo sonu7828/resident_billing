@@ -11,7 +11,10 @@ import {
   Users as UsersIcon
 } from 'lucide-react';
 
+import { useLanguage } from '../context/LanguageContext';
+
 export default function Residents() {
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
@@ -30,11 +33,11 @@ export default function Residents() {
     const base = "inline-flex items-center px-3 py-1.5 rounded-xl text-[11px] font-black uppercase tracking-[0.08em] shadow-sm border transition-all duration-300 ";
     switch (status) {
       case 'Paid':
-        return <span className={base + "bg-emerald-50 text-emerald-700 border-emerald-100/50"}>Paid</span>;
+        return <span className={base + "bg-emerald-50 text-emerald-700 border-emerald-100/50"}>{t('paid')}</span>;
       case 'Partial':
-        return <span className={base + "bg-amber-50 text-amber-700 border-amber-100/50"}>Partial</span>;
+        return <span className={base + "bg-amber-50 text-amber-700 border-amber-100/50"}>{t('partial')}</span>;
       case 'Overdue':
-        return <span className={base + "bg-rose-50 text-rose-700 border-rose-100/50"}>Overdue</span>;
+        return <span className={base + "bg-rose-50 text-rose-700 border-rose-100/50"}>{t('overdue')}</span>;
       default:
         return <span className={base + "bg-slate-50 text-slate-600 border-slate-100/50"}>{status}</span>;
     }
@@ -49,13 +52,13 @@ export default function Residents() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
         <div>
-          <h2 className="text-3xl font-extrabold text-slate-800 tracking-tight">Residents</h2>
+          <h2 className="text-3xl font-extrabold text-slate-800 tracking-tight">{t('residents')}</h2>
           <p className="text-slate-500 text-[15px] mt-1.5 font-medium">Manage and view all resident balances and data.</p>
         </div>
         <div>
           <button className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-[1.25rem] text-[15px] font-bold text-white hover:from-violet-700 hover:to-indigo-700 hover:shadow-lg hover:shadow-indigo-100 hover:-translate-y-0.5 transition-all duration-300 active:scale-95 group focus:ring-4 focus:ring-indigo-100">
             <Plus className="w-5 h-5 mr-2 group-hover:rotate-90 transition-transform duration-300" strokeWidth={3} />
-            Add Resident
+            {t('addResident')}
           </button>
         </div>
       </div>
@@ -72,7 +75,7 @@ export default function Residents() {
             <input
               type="text"
               className="block w-full pl-12 pr-12 py-3.5 border border-slate-200 rounded-2xl leading-5 bg-slate-50/30 hover:bg-slate-50 font-semibold text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-violet-500/10 focus:border-violet-400 sm:text-sm transition-all duration-300"
-              placeholder="Search by resident name..."
+              placeholder={t('searchPlaceholder')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -92,7 +95,7 @@ export default function Residents() {
                 value={houseFilter}
                 onChange={(e) => setHouseFilter(e.target.value)}
               >
-                <option value="All">All Houses</option>
+                <option value="All">{t('allHouses')}</option>
                 <option value="A1">House A1</option>
                 <option value="A2">House A2</option>
                 <option value="B1">House B1</option>
@@ -109,10 +112,10 @@ export default function Residents() {
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
               >
-                <option value="All">All Statuses</option>
-                <option value="Paid">Paid</option>
-                <option value="Partial">Partial</option>
-                <option value="Overdue">Overdue</option>
+                <option value="All">{t('allStatuses')}</option>
+                <option value="Paid">{t('paid')}</option>
+                <option value="Partial">{t('partial')}</option>
+                <option value="Overdue">{t('overdue')}</option>
               </select>
               <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-slate-400">
                 <Filter className="h-4 w-4" />
@@ -127,12 +130,12 @@ export default function Residents() {
             <table className="min-w-full divide-y divide-slate-50">
               <thead className="bg-slate-50/50">
                 <tr>
-                  <th scope="col" className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">Name</th>
-                  <th scope="col" className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">House</th>
-                  <th scope="col" className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">Monthly Charge</th>
-                  <th scope="col" className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">Outstanding</th>
-                  <th scope="col" className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">Status</th>
-                  <th scope="col" className="px-10 py-6 text-right text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">Actions</th>
+                  <th scope="col" className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">{t('resident')}</th>
+                  <th scope="col" className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">{t('house')}</th>
+                  <th scope="col" className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">{t('monthlyCharge')}</th>
+                  <th scope="col" className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">{t('outstanding')}</th>
+                  <th scope="col" className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">{t('status')}</th>
+                  <th scope="col" className="px-10 py-6 text-right text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">{t('actions')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-50">

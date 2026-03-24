@@ -11,17 +11,19 @@ import {
   X
 } from 'lucide-react';
 
-const MENU_ITEMS = [
-  { name: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
-  { name: 'Residents', icon: Users, path: '/residents' },
-  { name: 'Payments', icon: CreditCard, path: '/payments' },
-  { name: 'Bank', icon: Landmark, path: '/bank' },
-  { name: 'Reminders', icon: Bell, path: '/reminders' },
-  { name: 'Reports', icon: FileText, path: '/reports' },
-  { name: 'Settings', icon: Settings, path: '/settings' },
-];
+import { useLanguage } from '../context/LanguageContext';
 
+const MENU_ITEMS = [
+  { name: 'dashboard', icon: LayoutDashboard, path: '/dashboard' },
+  { name: 'residents', icon: Users, path: '/residents' },
+  { name: 'payments', icon: CreditCard, path: '/payments' },
+  { name: 'bank', icon: Landmark, path: '/bank' },
+  { name: 'reminders', icon: Bell, path: '/reminders' },
+  { name: 'reports', icon: FileText, path: '/reports' },
+  { name: 'settings', icon: Settings, path: '/settings' },
+];
 export default function Sidebar({ isOpen, setIsOpen }) {
+  const { t } = useLanguage();
   return (
     <>
       <div 
@@ -78,7 +80,7 @@ export default function Sidebar({ isOpen, setIsOpen }) {
                     }`} 
                     strokeWidth={isActive ? 2.5 : 2}
                   />
-                  <span className="z-10">{item.name}</span>
+                  <span className="z-10">{t(item.name)}</span>
                 </>
               )}
             </NavLink>

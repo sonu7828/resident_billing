@@ -16,7 +16,10 @@ import {
   FileX
 } from 'lucide-react';
 
+import { useLanguage } from '../context/LanguageContext';
+
 export default function Payments() {
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -35,14 +38,14 @@ export default function Payments() {
       return (
         <span className={base + "bg-emerald-50 text-emerald-700 border-emerald-100/50"}>
           <CheckCircle2 className="w-3.5 h-3.5" />
-          {status}
+          {t('completed')}
         </span>
       );
     }
     return (
       <span className={base + "bg-amber-50 text-amber-700 border-amber-100/50"}>
         <Clock className="w-3.5 h-3.5" />
-        {status}
+        {t('pending')}
       </span>
     );
   };
@@ -66,17 +69,17 @@ export default function Payments() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
         <div>
-          <h2 className="text-3xl font-extrabold text-slate-800 tracking-tight">Payments History</h2>
+          <h2 className="text-3xl font-extrabold text-slate-800 tracking-tight">{t('paymentsHistory')}</h2>
           <p className="text-slate-500 text-[15px] mt-1.5 font-medium">Tracking all financial transactions across the system.</p>
         </div>
         <div className="flex items-center gap-4">
           <button className="inline-flex items-center px-6 py-3 bg-white border border-slate-200 rounded-[1.25rem] text-[15px] font-bold text-slate-700 hover:bg-slate-50 hover:shadow-md transition-all active:scale-95 group focus:ring-4 focus:ring-slate-100">
             <Download className="w-4 h-4 mr-2.5 text-slate-400 group-hover:translate-y-0.5 transition-transform" />
-            Export CSV
+            {t('export')} CSV
           </button>
           <button className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-[1.25rem] text-[15px] font-bold text-white hover:from-emerald-700 hover:to-teal-700 hover:shadow-lg hover:shadow-emerald-100 hover:-translate-y-0.5 transition-all active:scale-95 group focus:ring-4 focus:ring-emerald-100">
             <Plus className="w-5 h-5 mr-2 group-hover:rotate-90 transition-transform" strokeWidth={3} />
-            Record Payment
+            {t('recordPayment')}
           </button>
         </div>
       </div>
@@ -93,7 +96,7 @@ export default function Payments() {
             <input
               type="text"
               className="block w-full pl-12 pr-12 py-3.5 border border-slate-200 rounded-2xl leading-5 bg-slate-50/30 hover:bg-slate-50 font-semibold text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-400 sm:text-sm transition-all duration-300"
-              placeholder="Search by resident or ID..."
+              placeholder={t('searchPaymentsPlaceholder')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -109,11 +112,11 @@ export default function Payments() {
           <div className="flex gap-4 w-full md:w-auto">
             <button className="flex-1 md:w-auto inline-flex items-center justify-center px-6 py-3.5 bg-slate-50/50 hover:bg-slate-50 border border-slate-200 rounded-2xl text-[13px] font-bold text-slate-700 transition-all hover:shadow-sm">
               <Calendar className="w-4 h-4 mr-2.5 text-slate-400" />
-              This Month
+              {t('thisMonth')}
             </button>
             <button className="flex-1 md:w-auto inline-flex items-center justify-center px-6 py-3.5 bg-slate-50/50 hover:bg-slate-50 border border-slate-200 rounded-2xl text-[13px] font-bold text-slate-700 transition-all hover:shadow-sm">
               <Filter className="w-4 h-4 mr-2.5 text-slate-400" />
-              More Filters
+              {t('moreFilters')}
             </button>
           </div>
         </div>
@@ -124,12 +127,12 @@ export default function Payments() {
             <table className="min-w-full divide-y divide-slate-50">
               <thead className="bg-slate-50/50">
                 <tr>
-                  <th className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">ID / Date</th>
-                  <th className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">Resident</th>
-                  <th className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">House</th>
-                  <th className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">Method</th>
-                  <th className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">Status</th>
-                  <th className="px-10 py-6 text-right text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">Amount</th>
+                  <th className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">{t('idDate')}</th>
+                  <th className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">{t('resident')}</th>
+                  <th className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">{t('house')}</th>
+                  <th className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">{t('method')}</th>
+                  <th className="px-10 py-6 text-left text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">{t('status')}</th>
+                  <th className="px-10 py-6 text-right text-[11px] font-black text-slate-400 uppercase tracking-[0.15em]">{t('amount')}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-50">
@@ -169,7 +172,7 @@ export default function Payments() {
                           </div>
                         </div>
                         <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mt-1 opacity-60">
-                          Applied to outstanding
+                          {t('appliedOutstanding')}
                         </div>
                       </div>
                     </td>
@@ -195,12 +198,12 @@ export default function Payments() {
                 <CheckCircle2 className="w-6 h-6" />
              </div>
              <div>
-                <p className="text-[11px] font-black text-emerald-700/60 uppercase tracking-[0.1em] leading-none mb-1">Reconciliation Status</p>
-                <p className="text-sm font-bold text-emerald-800">All payments are fully allocated</p>
+                <p className="text-[11px] font-black text-emerald-700/60 uppercase tracking-[0.1em] leading-none mb-1">{t('reconciliationStatus')}</p>
+                <p className="text-sm font-bold text-emerald-800">{t('allAllocated')}</p>
              </div>
           </div>
           <div className="flex items-center gap-8">
-            <span className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">Total Received</span>
+            <span className="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">{t('totalReceived')}</span>
             <span className="text-4xl font-black text-slate-800 tracking-tighter">€4,500.00</span>
           </div>
         </div>
